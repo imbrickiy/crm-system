@@ -12,4 +12,17 @@ prisma
     npx prisma init
 
     npm i dotenv-cli --dev
-    
+
+edit  .env file
+update file schema.prisma
+
+npm run migrate:dev --name init
+npx prisma generate
+npm i @prisma/client
+
+
+add Prisma Client to Next.js App
+add file client.ts to api folder
+
+add prisma/client in folder lib
+
