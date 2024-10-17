@@ -1,10 +1,12 @@
 import { TableClients } from "@/components/TableClients";
 import prisma from "@/lib/prisma";
 import { Client } from "@prisma/client";
-import React from "react";
-// import { fetchClients } from "../api/client";
+import React, { Suspense } from "react";
+import Loading from "./loading";
+import { revalidatePath } from "next/cache";
 
 async function fetchClients(): Promise<Client[]> {
+  revalidatePath("/");
   return await prisma.client.findMany();
 }
 
@@ -14,5 +16,9 @@ export const Clients = async () => {
     ...client,
     id: client.id.toString(),
   }));
-  return <TableClients clients={clientsWithStringIds} />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <TableClients clients={clientsWithStringIds} />
+    </Suspense>
+  );
 };

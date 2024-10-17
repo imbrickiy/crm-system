@@ -1,3 +1,4 @@
+"use client";
 import {
   Dialog,
   DialogContent,
@@ -9,6 +10,9 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import { deleteClient } from "@/app/actions";
+import { useState } from "react";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import { LucideTrash } from "lucide-react";
 
 const ModalConfirmation = ({
   children,
@@ -17,6 +21,17 @@ const ModalConfirmation = ({
   children: React.ReactNode;
   clientId: string;
 }>) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const someEvent = async () => {
+    try {
+      setIsLoading(true);
+      await deleteClient(clientId);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -30,9 +45,14 @@ const ModalConfirmation = ({
         <DialogFooter>
           <Button
             variant="destructive"
-            onClick={async () => await deleteClient(clientId)}
+            disabled={isLoading}
+            onClick={async () => someEvent()}
           >
-            Удалить
+            {isLoading ? (
+              <ReloadIcon className="h-4 w-4 animate-spin" />
+            ) : (
+              <LucideTrash className="h-4 w-4" />
+            )}
           </Button>
         </DialogFooter>
       </DialogContent>
