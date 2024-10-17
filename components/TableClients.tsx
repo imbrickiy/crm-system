@@ -11,6 +11,8 @@ import {
 import { Button } from "./ui/button";
 import { PencilIcon, TrashIcon, EyeIcon } from "lucide-react";
 import ModalClients from "./ModalClients";
+import { deleteClient } from "@/app/actions";
+import ModalConfirmation from "./ModalConfirmation";
 
 interface Client {
   id: string;
@@ -47,9 +49,14 @@ export const TableClients = ({ clients }: { clients: Client[] }) => {
                   <PencilIcon className="h-4 w-4" />
                 </Button>
               </ModalClients>
-              <Button variant="destructive" size="icon">
-                <TrashIcon className="h-4 w-4" />
-              </Button>
+              <ModalConfirmation clientId={client.id}>
+                <Button
+                  variant="destructive"
+                  size="icon"
+                >
+                  <TrashIcon className="h-4 w-4" />
+                </Button>
+              </ModalConfirmation>
             </TableCell>
           </TableRow>
         ))}

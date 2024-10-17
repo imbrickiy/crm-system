@@ -17,6 +17,7 @@ edit  .env file
 update file schema.prisma
 
 npm run migrate:dev --name init
+npx prisma db push
 npx prisma generate
 npm i @prisma/client
 
