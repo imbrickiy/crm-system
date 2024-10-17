@@ -1,7 +1,7 @@
 
 import prisma from '@/lib/prisma'
 import { Client } from '@prisma/client'
-import { notFound } from 'next/navigation' 
+// import { notFound } from 'next/navigation' 
 
 
 

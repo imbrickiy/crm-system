@@ -1,4 +1,4 @@
-import { TableClients } from "@/components/ui/TableClients";
+import { TableClients } from "@/components/TableClients";
 import prisma from "@/lib/prisma";
 import { Client } from "@prisma/client";
 import React from "react";

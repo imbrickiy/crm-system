@@ -8,9 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "./button";
-import Link from "next/link";
+import { Button } from "./ui/button";
 import { PencilIcon, TrashIcon, EyeIcon } from "lucide-react";
+import ModalClients from "./ModalClients";
 
 interface Client {
   id: string;
@@ -37,17 +37,17 @@ export const TableClients = ({ clients }: { clients: Client[] }) => {
             <TableCell>{client.title}</TableCell>
             <TableCell>{client.description}</TableCell>
             <TableCell className="text-end gap-3 flex justify-end">
-              <Button variant="outline" size="icon" asChild>
-                <Link href={`/clients/${client.id}`}>
+              <ModalClients client={client} view>
+                <Button variant="outline" size="icon">
                   <EyeIcon className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="icon" asChild>
-                <Link href={`/clients/${client.id}`}>
+                </Button>
+              </ModalClients>
+              <ModalClients client={client}>
+                <Button variant="outline" size="icon">
                   <PencilIcon className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button variant="destructive" size="icon" onClick={() => {}}>
+                </Button>
+              </ModalClients>
+              <Button variant="destructive" size="icon">
                 <TrashIcon className="h-4 w-4" />
               </Button>
             </TableCell>
